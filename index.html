@@ -5,11 +5,20 @@
 
   <style>
     body {
-      text-align: center;
+      margin: 0;
       font-family: Arial;
-      margin-top: 100px;
       background: #ffe6f0;
       overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
     }
 
     h1 {
@@ -19,8 +28,12 @@
 
     p {
       font-size: 22px;
-      white-space: pre-line;
+      margin-top: 20px;
       animation: fadeIn 2.5s ease-in-out;
+    }
+
+    .buttons {
+      margin-top: 30px;
     }
 
     button {
@@ -68,17 +81,21 @@
 
 <body onclick="startEverything()">
 
-<h1>Hi Rissa… it’s Bas</h1>
+<div class="container">
+  <h1>Hi Rissa… it’s Bas</h1>
 
-<p>
-I miss you… like a lot 🥺<br><br>
-I was thinking about you, and I just—<br>
-wanna take you out tonight.<br><br>
-What do you say?
-</p>
+  <p>
+    I miss you… like a lot 🥺<br><br>
+    I was thinking about you, and I just—<br>
+    wanna take you out tonight.<br><br>
+    What do you say?
+  </p>
 
-<button id="yes" onclick="sayYes()">Yes 😍</button>
-<button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
+  <div class="buttons">
+    <button id="yes" onclick="sayYes()">Yes 😍</button>
+    <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
+  </div>
+</div>
 
 <script>
 let started = false;
@@ -95,9 +112,7 @@ function startEverything() {
 
   document.body.appendChild(audio);
 }
-</script>
 
-<script>
 function sayYes() {
   document.body.innerHTML = `
     <h1>I knew it 😏</h1>
@@ -114,9 +129,7 @@ function sayYes() {
     window.open(url, "_blank");
   }, 1500);
 }
-</script>
 
-<script>
 let messages = [
   "Rissa… really? 😢",
   "Come on… don’t do this 🥺",
@@ -142,9 +155,7 @@ function moveNo() {
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
-</script>
 
-<script>
 function startHearts() {
   setInterval(() => {
     let heart = document.createElement("div");
