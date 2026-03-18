@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date? 😏</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      margin-top: 100px;
+      background: #ffe6f0;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #yes {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    #no {
+      background-color: #ccc;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>So... are we going on a date tonight or what? 😉💖</h1>
+<p>(Choose wisely 😌)</p>
+
+<button id="yes" onclick="sayYes()">Obviously yes 😍</button>
+<button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
+
+<script>
+  let messages = [
+    "Are you sure? 😢",
+    "Think again... 🥺",
+    "Last chance 👀",
+    "You’re breaking my heart 💔",
+    "Please...? 😭",
+    "I’ll bring food 🥲",
+    "Okay now you're just mean 😤",
+    "Fine... I give up 😔"
+  ];
+
+  let count = 0;
+
+  function sayYes() {
+    document.body.innerHTML = "<h1>LET'S GOOOO 😍🔥</h1>";
+  }
+
+  function moveNo() {
+    let noBtn = document.getElementById("no");
+
+    // Change text
+    if (count < messages.length) {
+      noBtn.innerText = messages[count];
+      count++;
+    }
+
+    // Move randomly
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // Shrink button
+    let scale = 1 - count * 0.1;
+    noBtn.style.transform = "scale(" + scale + ")";
+
+    // Disappear at the end 😈
+    if (count >= messages.length) {
+      noBtn.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
