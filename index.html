@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Date? 😏</title>
+  <title>For Rissa 💖</title>
   <style>
     body {
       text-align: center;
@@ -12,6 +12,10 @@
 
     h1 {
       font-size: 40px;
+    }
+
+    p {
+      font-size: 18px;
     }
 
     button {
@@ -35,53 +39,64 @@
   </style>
 </head>
 
-<body>
+<body onclick="playMusic()">
 
-<h1>So... are we going on a date tonight or what? 😉💖</h1>
-<p>(Choose wisely 😌)</p>
+<h1>Rissa... 💖</h1>
+<h1>So... are we going on a date tonight or what? 😉</h1>
+<p>I promise it'll be worth it 😌</p>
 
 <button id="yes" onclick="sayYes()">Obviously yes 😍</button>
 <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
 
+<!-- 🎵 MUSIC -->
+<script>
+  function playMusic() {
+    let iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube.com/embed/v45F0YesdZM?autoplay=1&loop=1&playlist=v45F0YesdZM";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+  }
+</script>
+
+<!-- 😈 CHAOTIC NO BUTTON -->
 <script>
   let messages = [
-    "Are you sure? 😢",
-    "Think again... 🥺",
-    "Last chance 👀",
-    "You’re breaking my heart 💔",
-    "Please...? 😭",
-    "I’ll bring food 🥲",
-    "Okay now you're just mean 😤",
-    "Fine... I give up 😔"
+    "Rissa… are you sure? 😢",
+    "Think again, please 🥺",
+    "Don't do this to me 😭",
+    "I was planning something nice 💐",
+    "I'll treat you, I swear 🥲",
+    "You're really saying no to me? 😔",
+    "Okay… now I'm sad 💔",
+    "Fine... I’ll wait for your yes 😌"
   ];
 
   let count = 0;
 
   function sayYes() {
-    document.body.innerHTML = "<h1>LET'S GOOOO 😍🔥</h1>";
+    document.body.innerHTML = `
+      <h1>I knew it 😏💖</h1>
+      <p>Pick you up at 7? 😉</p>
+    `;
   }
 
   function moveNo() {
     let noBtn = document.getElementById("no");
 
-    // Change text
     if (count < messages.length) {
       noBtn.innerText = messages[count];
       count++;
     }
 
-    // Move randomly
     let x = Math.random() * (window.innerWidth - 100);
     let y = Math.random() * (window.innerHeight - 50);
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // Shrink button
     let scale = 1 - count * 0.1;
     noBtn.style.transform = "scale(" + scale + ")";
 
-    // Disappear at the end 😈
     if (count >= messages.length) {
       noBtn.style.display = "none";
     }
