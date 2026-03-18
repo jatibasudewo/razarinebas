@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>For Rissa 💖</title>
+  <title>For Rissa</title>
 
   <style>
     body {
@@ -53,7 +53,7 @@
   </style>
 </head>
 
-<body onclick="playMusic()">
+<body onclick="startEverything()">
 
 <h1 id="text"></h1>
 <p id="subtext"></p>
@@ -61,117 +61,124 @@
 <button id="yes" onclick="sayYes()">Obviously yes 😍</button>
 <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
 
-<!-- 🎵 MUSIC -->
+<!-- 🎬 START EVERYTHING (music + typing) -->
 <script>
-  function playMusic() {
-    let iframe = document.createElement("iframe");
-    iframe.src = "https://www.youtube.com/embed/v45F0YesdZM?autoplay=1&loop=1&playlist=v45F0YesdZM";
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-  }
+let started = false;
+
+function startEverything() {
+  if (started) return;
+  started = true;
+
+  // 🎵 MUSIC
+  let iframe = document.createElement("iframe");
+  iframe.src = "https://www.youtube.com/embed/v45F0YesdZM?autoplay=1&loop=1&playlist=v45F0YesdZM";
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
+
+  // ✨ START TYPING
+  typeText();
+}
 </script>
 
 <!-- ✨ TYPING -->
 <script>
-  let text = "Rissa... 💖";
-  let text2 = "So... are we going on a date tonight or what? 😉";
+let text = "Rissa...";
+let text2 = "So... are we going on a date tonight or what? 😉";
 
-  let i = 0;
-  let j = 0;
+let i = 0;
+let j = 0;
 
-  function typeText() {
-    if (i < text.length) {
-      document.getElementById("text").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeText, 80);
-    } else {
-      setTimeout(typeText2, 500);
-    }
+function typeText() {
+  if (i < text.length) {
+    document.getElementById("text").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText, 80);
+  } else {
+    setTimeout(typeText2, 500);
   }
+}
 
-  function typeText2() {
-    if (j < text2.length) {
-      document.getElementById("subtext").innerHTML += text2.charAt(j);
-      j++;
-      setTimeout(typeText2, 50);
-    }
+function typeText2() {
+  if (j < text2.length) {
+    document.getElementById("subtext").innerHTML += text2.charAt(j);
+    j++;
+    setTimeout(typeText2, 50);
   }
-
-  typeText();
+}
 </script>
 
 <!-- 😈 NO BUTTON -->
 <script>
-  let messages = [
-    "Rissa… are you sure? 😢",
-    "Think again please 🥺",
-    "Don't do this to me 😭",
-    "I had plans for us 💐",
-    "I’ll treat you 😌",
-    "You’re really saying no? 😔",
-    "Okay… now I'm sad 💔",
-    "Fine... I’ll wait for your yes 😏"
-  ];
+let messages = [
+  "Rissa… are you sure? 😢",
+  "Think again please 🥺",
+  "Don't do this to me 😭",
+  "I had something planned for us 💐",
+  "I’ll make it worth it 😌",
+  "You’re really saying no? 😔",
+  "Okay… now I'm sad 💔",
+  "Fine... I’ll wait for your yes 😏"
+];
 
-  let count = 0;
+let count = 0;
 
-  function sayYes() {
-    document.body.innerHTML = `
-      <h1>I knew it 😏💖</h1>
-      <p>Pick you up at 7? 😉</p>
-    `;
+function sayYes() {
+  document.body.innerHTML = `
+    <h1>I knew it 😏</h1>
+    <p>Let’s meet somewhere tonight… I’ll make it special for you 😌💖</p>
+  `;
 
-    startHearts();
+  startHearts();
 
-    // 📱 WhatsApp FINISHER
-    let phone = "6281180002349";
-    let message = "Okay fine… I’ll go on a date with you tonight 😌💖";
-    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+  // 📱 WhatsApp
+  let phone = "6281180002349";
+  let message = "Okay… I’ll go on a date with you tonight 😌";
+  let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
 
-    setTimeout(() => {
-      window.open(url, "_blank");
-    }, 1500);
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, 1500);
+}
+
+function moveNo() {
+  let noBtn = document.getElementById("no");
+
+  if (count < messages.length) {
+    noBtn.innerText = messages[count];
+    count++;
   }
 
-  function moveNo() {
-    let noBtn = document.getElementById("no");
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
 
-    if (count < messages.length) {
-      noBtn.innerText = messages[count];
-      count++;
-    }
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 
-    let x = Math.random() * (window.innerWidth - 100);
-    let y = Math.random() * (window.innerHeight - 50);
+  let scale = 1 - count * 0.1;
+  noBtn.style.transform = "scale(" + scale + ")";
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    let scale = 1 - count * 0.1;
-    noBtn.style.transform = "scale(" + scale + ")";
-
-    if (count >= messages.length) {
-      noBtn.style.display = "none";
-    }
+  if (count >= messages.length) {
+    noBtn.style.display = "none";
   }
+}
 </script>
 
 <!-- 💖 HEARTS -->
 <script>
-  function startHearts() {
-    setInterval(() => {
-      let heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-      document.body.appendChild(heart);
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
-    }, 300);
-  }
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
 </script>
 
 </body>
