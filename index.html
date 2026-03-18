@@ -115,11 +115,23 @@ function startEverything() {
 
 function sayYes() {
   document.body.innerHTML = `
-    <h1>I knew it 😏</h1>
-    <p>I’ll make tonight special… just for you 💖</p>
+    <div style="text-align:center; margin-top: 80px;">
+      
+      <h1 style="margin-bottom: 5px;">I knew it 😏</h1>
+      
+      <p id="nextText" style="margin-top: 30px; opacity: 0; transition: 1s;">
+        I’ll make tonight special… just for you 💖
+      </p>
+
+    </div>
   `;
 
   startHearts();
+
+  // ✨ delayed text reveal (nice emotional effect)
+  setTimeout(() => {
+    document.getElementById("nextText").style.opacity = 1;
+  }, 800);
 
   let phone = "6282180000621";
   let message = "Okay… I’ll go on a date with you tonight 😌";
@@ -127,7 +139,7 @@ function sayYes() {
 
   setTimeout(() => {
     window.open(url, "_blank");
-  }, 1500);
+  }, 2000);
 }
 
 let messages = [
