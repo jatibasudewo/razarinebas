@@ -17,7 +17,8 @@
     }
 
     p {
-      font-size: 18px;
+      font-size: 20px;
+      white-space: pre-line;
     }
 
     button {
@@ -58,32 +59,32 @@
 <h1 id="text"></h1>
 <p id="subtext"></p>
 
-<button id="yes" onclick="sayYes()">Obviously yes 😍</button>
+<button id="yes" onclick="sayYes()">Yes 😍</button>
 <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
 
-<!-- 🎬 START EVERYTHING (music + typing) -->
 <script>
 let started = false;
+let audio;
 
 function startEverything() {
   if (started) return;
   started = true;
 
   // 🎵 MUSIC
-  let iframe = document.createElement("iframe");
-  iframe.src = "https://www.youtube.com/embed/v45F0YesdZM?autoplay=1&loop=1&playlist=v45F0YesdZM";
-  iframe.style.display = "none";
-  document.body.appendChild(iframe);
+  audio = document.createElement("audio");
+  audio.src = "song.mp3"; // 👈 YOUR SONG HERE
+  audio.loop = true;
+  audio.play();
 
-  // ✨ START TYPING
+  document.body.appendChild(audio);
+
   typeText();
 }
 </script>
 
-<!-- ✨ TYPING -->
 <script>
-let text = "Rissa...";
-let text2 = "So... are we going on a date tonight or what? 😉";
+let text = "Hi Rissa! Bas here...";
+let text2 = "I miss you, like a lot\nWanna have a date, meet me tonight?";
 
 let i = 0;
 let j = 0;
@@ -100,28 +101,15 @@ function typeText() {
 
 function typeText2() {
   if (j < text2.length) {
-    document.getElementById("subtext").innerHTML += text2.charAt(j);
+    let char = text2.charAt(j);
+    document.getElementById("subtext").innerHTML += (char === "\n") ? "<br>" : char;
     j++;
     setTimeout(typeText2, 50);
   }
 }
 </script>
 
-<!-- 😈 NO BUTTON -->
 <script>
-let messages = [
-  "Rissa… are you sure? 😢",
-  "Think again please 🥺",
-  "Don't do this to me 😭",
-  "I had something planned for us 💐",
-  "I’ll make it worth it 😌",
-  "You’re really saying no? 😔",
-  "Okay… now I'm sad 💔",
-  "Fine... I’ll wait for your yes 😏"
-];
-
-let count = 0;
-
 function sayYes() {
   document.body.innerHTML = `
     <h1>I knew it 😏</h1>
@@ -130,7 +118,6 @@ function sayYes() {
 
   startHearts();
 
-  // 📱 WhatsApp
   let phone = "6281180002349";
   let message = "Okay… I’ll go on a date with you tonight 😌";
   let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
@@ -139,6 +126,19 @@ function sayYes() {
     window.open(url, "_blank");
   }, 1500);
 }
+</script>
+
+<script>
+let messages = [
+  "Rissa… are you sure? 😢",
+  "Think again please 🥺",
+  "Don't do this 😭",
+  "I had something planned 💐",
+  "I’ll make it worth it 😌",
+  "Okay now I'm sad 💔"
+];
+
+let count = 0;
 
 function moveNo() {
   let noBtn = document.getElementById("no");
@@ -153,17 +153,9 @@ function moveNo() {
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-
-  let scale = 1 - count * 0.1;
-  noBtn.style.transform = "scale(" + scale + ")";
-
-  if (count >= messages.length) {
-    noBtn.style.display = "none";
-  }
 }
 </script>
 
-<!-- 💖 HEARTS -->
 <script>
 function startHearts() {
   setInterval(() => {
@@ -171,12 +163,9 @@ function startHearts() {
     heart.className = "heart";
     heart.innerHTML = "💖";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
+    setTimeout(() => heart.remove(), 5000);
   }, 300);
 }
 </script>
