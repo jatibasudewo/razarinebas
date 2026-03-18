@@ -13,12 +13,14 @@
     }
 
     h1 {
-      font-size: 40px;
+      font-size: 42px;
+      animation: fadeIn 1.5s ease-in-out;
     }
 
     p {
-      font-size: 20px;
+      font-size: 22px;
       white-space: pre-line;
+      animation: fadeIn 2.5s ease-in-out;
     }
 
     button {
@@ -28,11 +30,16 @@
       cursor: pointer;
       border: none;
       border-radius: 10px;
+      transition: 0.2s;
     }
 
     #yes {
       background-color: #ff4d88;
       color: white;
+    }
+
+    #yes:hover {
+      transform: scale(1.1);
     }
 
     #no {
@@ -51,13 +58,24 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-100vh); opacity: 0; }
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
 <body onclick="startEverything()">
 
-<h1 id="text"></h1>
-<p id="subtext"></p>
+<h1>Hi Rissa… it’s Bas</h1>
+
+<p>
+I miss you… like a lot 🥺<br><br>
+I was thinking about you, and I just—<br>
+wanna take you out tonight.<br><br>
+What do you say?
+</p>
 
 <button id="yes" onclick="sayYes()">Yes 😍</button>
 <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
@@ -70,42 +88,12 @@ function startEverything() {
   if (started) return;
   started = true;
 
-  // 🎵 MUSIC
   audio = document.createElement("audio");
-  audio.src = "song.mp3"; // 👈 YOUR SONG HERE
+  audio.src = "song.mp3";
   audio.loop = true;
   audio.play();
 
   document.body.appendChild(audio);
-
-  typeText();
-}
-</script>
-
-<script>
-let text = "Hi Rissa! Bas here...";
-let text2 = "I miss you, like a lot\nWanna have a date, meet me tonight?";
-
-let i = 0;
-let j = 0;
-
-function typeText() {
-  if (i < text.length) {
-    document.getElementById("text").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 80);
-  } else {
-    setTimeout(typeText2, 500);
-  }
-}
-
-function typeText2() {
-  if (j < text2.length) {
-    let char = text2.charAt(j);
-    document.getElementById("subtext").innerHTML += (char === "\n") ? "<br>" : char;
-    j++;
-    setTimeout(typeText2, 50);
-  }
 }
 </script>
 
@@ -113,7 +101,7 @@ function typeText2() {
 function sayYes() {
   document.body.innerHTML = `
     <h1>I knew it 😏</h1>
-    <p>Let’s meet somewhere tonight… I’ll make it special for you 😌💖</p>
+    <p>I’ll make tonight special… just for you 💖</p>
   `;
 
   startHearts();
@@ -130,12 +118,12 @@ function sayYes() {
 
 <script>
 let messages = [
-  "Rissa… are you sure? 😢",
-  "Think again please 🥺",
-  "Don't do this 😭",
-  "I had something planned 💐",
-  "I’ll make it worth it 😌",
-  "Okay now I'm sad 💔"
+  "Rissa… really? 😢",
+  "Come on… don’t do this 🥺",
+  "At least think about it 💭",
+  "I had something planned… 💐",
+  "You might actually like it 😌",
+  "Okay now I’m just sad 💔"
 ];
 
 let count = 0;
