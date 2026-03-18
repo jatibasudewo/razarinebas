@@ -39,7 +39,6 @@
       position: absolute;
     }
 
-    /* 💖 Floating hearts */
     .heart {
       position: fixed;
       bottom: -10px;
@@ -72,7 +71,7 @@
   }
 </script>
 
-<!-- ✨ TYPING EFFECT -->
+<!-- ✨ TYPING -->
 <script>
   let text = "Rissa... 💖";
   let text2 = "So... are we going on a date tonight or what? 😉";
@@ -101,7 +100,7 @@
   typeText();
 </script>
 
-<!-- 😈 CHAOTIC NO BUTTON -->
+<!-- 😈 NO BUTTON -->
 <script>
   let messages = [
     "Rissa… are you sure? 😢",
@@ -121,7 +120,17 @@
       <h1>I knew it 😏💖</h1>
       <p>Pick you up at 7? 😉</p>
     `;
+
     startHearts();
+
+    // 📱 WhatsApp FINISHER
+    let phone = "6281180002349";
+    let message = "Okay fine… I’ll go on a date with you tonight 😌💖";
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+    setTimeout(() => {
+      window.open(url, "_blank");
+    }, 1500);
   }
 
   function moveNo() {
@@ -147,7 +156,7 @@
   }
 </script>
 
-<!-- 💖 HEART ANIMATION -->
+<!-- 💖 HEARTS -->
 <script>
   function startHearts() {
     setInterval(() => {
