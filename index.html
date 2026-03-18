@@ -2,12 +2,14 @@
 <html>
 <head>
   <title>For Rissa 💖</title>
+
   <style>
     body {
       text-align: center;
       font-family: Arial;
       margin-top: 100px;
       background: #ffe6f0;
+      overflow: hidden;
     }
 
     h1 {
@@ -36,14 +38,26 @@
       background-color: #ccc;
       position: absolute;
     }
+
+    /* 💖 Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
   </style>
 </head>
 
 <body onclick="playMusic()">
 
-<h1>Rissa... 💖</h1>
-<h1>So... are we going on a date tonight or what? 😉</h1>
-<p>I promise it'll be worth it 😌</p>
+<h1 id="text"></h1>
+<p id="subtext"></p>
 
 <button id="yes" onclick="sayYes()">Obviously yes 😍</button>
 <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 😢</button>
@@ -58,17 +72,46 @@
   }
 </script>
 
+<!-- ✨ TYPING EFFECT -->
+<script>
+  let text = "Rissa... 💖";
+  let text2 = "So... are we going on a date tonight or what? 😉";
+
+  let i = 0;
+  let j = 0;
+
+  function typeText() {
+    if (i < text.length) {
+      document.getElementById("text").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeText, 80);
+    } else {
+      setTimeout(typeText2, 500);
+    }
+  }
+
+  function typeText2() {
+    if (j < text2.length) {
+      document.getElementById("subtext").innerHTML += text2.charAt(j);
+      j++;
+      setTimeout(typeText2, 50);
+    }
+  }
+
+  typeText();
+</script>
+
 <!-- 😈 CHAOTIC NO BUTTON -->
 <script>
   let messages = [
     "Rissa… are you sure? 😢",
-    "Think again, please 🥺",
+    "Think again please 🥺",
     "Don't do this to me 😭",
-    "I was planning something nice 💐",
-    "I'll treat you, I swear 🥲",
-    "You're really saying no to me? 😔",
+    "I had plans for us 💐",
+    "I’ll treat you 😌",
+    "You’re really saying no? 😔",
     "Okay… now I'm sad 💔",
-    "Fine... I’ll wait for your yes 😌"
+    "Fine... I’ll wait for your yes 😏"
   ];
 
   let count = 0;
@@ -78,6 +121,7 @@
       <h1>I knew it 😏💖</h1>
       <p>Pick you up at 7? 😉</p>
     `;
+    startHearts();
   }
 
   function moveNo() {
@@ -100,6 +144,24 @@
     if (count >= messages.length) {
       noBtn.style.display = "none";
     }
+  }
+</script>
+
+<!-- 💖 HEART ANIMATION -->
+<script>
+  function startHearts() {
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }, 300);
   }
 </script>
 
